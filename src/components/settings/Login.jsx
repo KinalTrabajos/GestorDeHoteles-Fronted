@@ -7,6 +7,8 @@ import {
      validatePassword
 } from "../../shared/validators";
 import { useLogin } from "../../shared/hooks"
+import { FondoLogin } from "../FondoLogin";
+
  
 export const Login = ({ switchAuthHandler }) => {
      
@@ -65,46 +67,45 @@ export const Login = ({ switchAuthHandler }) => {
     const isSubmitButtonDisabled = isLoading || !formState.username.isValid || !formState.password.isValid;
 
     return (
-  <div className="min-h-screen flex items-center justify-center bg-[url('/hotel-bg.jpg')] bg-cover bg-center px-4">
-    <div className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">
-      <h2 className="text-3xl font-bold text-center text-indigo-800 mb-6">Iniciar Sesión</h2>
-      <form className="space-y-5">
-        <Input
-          field="username"
-          label="Usuario"
-          value={formState.username.value}
-          onChangeHandler={handleInputValueChange}
-          type="text"
-          onBlurHandler={handleInputValidationOnBlur}
-          showErrorMessage={formState.username.showError}
-          validationMessage={validateNotEmptyMessage}
-        />
-        <Input
-          field="password"
-          label="Contraseña"
-          value={formState.password.value}
-          onChangeHandler={handleInputValueChange}
-          type="password"
-          onBlurHandler={handleInputValidationOnBlur}
-          showErrorMessage={formState.password.showError}
-          validationMessage={validatePasswordMessage}
-        />
-        <button
-          onClick={handleLogin}
-          disabled={isSubmitButtonDisabled}
-          className="w-full bg-indigo-700 text-white py-2 rounded-xl hover:bg-indigo-800 transition duration-300 disabled:opacity-50"
-        >
-          Iniciar Sesión
-        </button>
-      </form>
-      <p
-        onClick={switchAuthHandler}
-        className="mt-4 text-center text-sm text-indigo-700 hover:underline cursor-pointer"
-      >
-        ¿No tienes cuenta? Regístrate aquí
-      </p>
-    </div>
-  </div>
-);
-
+        <FondoLogin>    
+          <div className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">
+            <h2 className="text-3xl font-bold text-center text-indigo-800 mb-6">Iniciar Sesión</h2>
+            <form className="space-y-5">
+              <Input
+                field="username"
+                label="Usuario"
+                value={formState.username.value}
+                onChangeHandler={handleInputValueChange}
+                type="text"
+                onBlurHandler={handleInputValidationOnBlur}
+                showErrorMessage={formState.username.showError}
+                validationMessage={validateNotEmptyMessage}
+              />
+              <Input
+                field="password"
+                label="Contraseña"
+                value={formState.password.value}
+                onChangeHandler={handleInputValueChange}
+                type="password"
+                onBlurHandler={handleInputValidationOnBlur}
+                showErrorMessage={formState.password.showError}
+                validationMessage={validatePasswordMessage}
+              />
+              <button
+                onClick={handleLogin}
+                disabled={isSubmitButtonDisabled}
+                className="w-full bg-indigo-700 text-white py-2 rounded-xl hover:bg-indigo-800 transition duration-300 disabled:opacity-50"
+              >
+                Iniciar Sesión
+              </button>
+            </form>
+            <p
+              onClick={switchAuthHandler}
+              className="mt-4 text-center text-sm text-indigo-700 hover:underline cursor-pointer"
+            >
+              ¿No tienes cuenta? Regístrate aquí
+            </p>
+          </div>
+        </FondoLogin>
+    )
 } 

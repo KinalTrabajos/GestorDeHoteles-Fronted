@@ -11,6 +11,8 @@ import {
     passwordConfirmationMessage
 } from '../../shared/validators'
 import { useRegister } from "../../shared/hooks"
+import { FondoRegister } from "../FondoRegister";
+
 
 export const Register = ({switchAuthHandler}) =>{
     const {register, isLoading} = useRegister()
@@ -107,7 +109,7 @@ export const Register = ({switchAuthHandler}) =>{
         !formState.password.isValid ||
         !formState.passwordConfir.isValid;
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[url('/hotel-bg.jpg')] bg-cover bg-center px-4">
+      <FondoRegister>
         <div className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-lg">
           <h2 className="text-3xl font-bold text-center text-indigo-800 mb-6">Crear Cuenta</h2>
           <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -186,7 +188,7 @@ export const Register = ({switchAuthHandler}) =>{
             ¿Ya tienes cuenta? Inicia sesión
           </p>
         </div>
-      </div>
+      </FondoRegister>
     )
 
 }

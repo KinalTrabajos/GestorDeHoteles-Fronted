@@ -1,7 +1,9 @@
+import { PagePrincipal } from "../../components/PagePrincipal"
+
 export const DashboardPage = () => {
     return(
         <div>
-            <h1>Hola como estas</h1>
+            <PagePrincipal/>
         </div>
     )
 }

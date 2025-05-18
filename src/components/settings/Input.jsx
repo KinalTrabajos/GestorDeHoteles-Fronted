@@ -39,6 +39,8 @@ export const Input = ({
                         value={value}
                         onChange={handleValueChange}
                         onBlur={handleInputBlur}
+                        className="w-full bg-[#FFE1E0] border border-gray-300 text-gray-800 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-300"
+
                     />
                 )}
                 <span className="auth-form-validation-message">
