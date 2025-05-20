@@ -11,7 +11,7 @@ import {
     passwordConfirmationMessage
 } from '../../shared/validators'
 import { useRegister } from "../../shared/hooks"
-import { FondoRegister } from "../FondoRegister";
+import { FondoRegister } from "../fondos/FondoRegister";
 
 
 export const Register = ({switchAuthHandler}) =>{

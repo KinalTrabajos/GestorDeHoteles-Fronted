@@ -7,7 +7,7 @@ import {
      validatePassword
 } from "../../shared/validators";
 import { useLogin } from "../../shared/hooks"
-import { FondoLogin } from "../FondoLogin";
+import { FondoLogin } from "../fondos/FondoLogin";
 
  
 export const Login = ({ switchAuthHandler }) => {

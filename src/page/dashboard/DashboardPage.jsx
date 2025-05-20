@@ -1,4 +1,4 @@
-import { PagePrincipal } from "../../components/PagePrincipal"
+import { PagePrincipal } from "../../components/principalPage/PagePrincipal"
 
 export const DashboardPage = () => {
     return(

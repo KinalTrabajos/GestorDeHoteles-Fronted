@@ -1,4 +1,4 @@
-import { Navbar } from "../components/Navbar"
+import { Navbar } from "../Navbars/Navbar"
 
 export const PagePrincipal = () => {
   return (
