@@ -27,7 +27,7 @@ export const useLogin = () => {
 
         toast.success("Seción iniciada correctamente")
 
-        navigate('/dashboardPage')
+        navigate('/')
     }
     return {
         login,
