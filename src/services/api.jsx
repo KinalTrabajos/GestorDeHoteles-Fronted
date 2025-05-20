@@ -39,3 +39,16 @@ export const register = async(data) =>{
         }
     }
 }
+
+export const getRooms = async () => {
+    try {
+        const response = await apiHotel.get('/viewRooms');
+        return response.data; 
+    } catch (e) {
+        return {
+            success: false,
+            msg: "Error al obtener los cuartos",
+            error: e.message || e
+        };
+    }
+};
