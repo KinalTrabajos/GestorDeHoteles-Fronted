@@ -3,8 +3,8 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-  { name: 'Hoteles', href: '#' },
-  { name: 'Habitaciones', href: '#' },
+  { name: 'Hoteles', href: '/hotelPage' },
+  { name: 'Habitaciones', href: '/auth' },
   { name: 'Informes', href: '#' },
   { name: 'Reservas', href: '#' },
   { name: 'Eventos', href: '#' },

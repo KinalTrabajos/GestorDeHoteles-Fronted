@@ -1,4 +1,5 @@
-import { Navbar } from "../Navbars/Navbar"
+import { ViewHotel } from "../Hoteles/ViewHotel";
+import { Navbar } from "../Navbars/Navbar";
 
 export const PagePrincipal = () => {
   return (
@@ -27,27 +28,12 @@ export const PagePrincipal = () => {
           </div>
         </div>
       </section>
-
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-10">¿Qué puedes hacer aquí?</h2>
-          <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              { title: "Hoteles", desc: "Explora y gestiona la información de tus hoteles.", icon: "🏨" },
-              { title: "Habitaciones", desc: "Administra habitaciones disponibles, precios y más.", icon: "🛏️" },
-              { title: "Reservas", desc: "Realiza, edita o cancela reservaciones fácilmente.", icon: "📅" },
-              { title: "Eventos", desc: "Organiza y visualiza eventos especiales en tu hotel.", icon: "🎉" },
-              { title: "Informes", desc: "Consulta estadísticas y reportes detallados.", icon: "📊" },
-            ].map(({ title, desc, icon }) => (
-              <div key={title} className="bg-white shadow rounded-lg p-6 hover:shadow-lg transition">
-                <div className="text-4xl mb-4">{icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{title}</h3>
-                <p className="text-gray-600">{desc}</p>
-              </div>
-            ))}
-          </div>
+      <section id="hoteles" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Nuestros Hoteles</h2>
+          <ViewHotel />
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
