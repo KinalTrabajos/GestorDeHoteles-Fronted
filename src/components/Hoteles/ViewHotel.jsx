@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useWiewHoteles } from "../../shared/hooks/hoteles";
 import { fetchHotelImages } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 export const ViewHotel = () => {
   const { hoteles, isLoading, error } = useWiewHoteles()
   const [imagenes, setImagenes] = useState([])
+  const navigate = useNavigate();
 
   useEffect(() => {
     const obtenerImagenes = async () => {
@@ -24,12 +26,13 @@ export const ViewHotel = () => {
   if (error) return <p className="text-center text-red-500 mt-6">Error al cargar hoteles</p>
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
-      {hoteles.map((hotel, index) => (
-        <div
-          key={hotel._id}
-          className="bg-white shadow-lg rounded-2xl p-4 border hover:scale-105 transition-transform"
-        >
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+    {hoteles.map((hotel, index) => (
+          <div
+            key={hotel._id}
+            onClick={() => navigate(`/hotel/${hotel._id}`)}
+            className="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200 hover:shadow-2xl transition-transform hover:scale-105 cursor-pointer"
+          >
           <img
             src={imagenes[index % imagenes.length]?.src?.medium || "/imagen-no-disponible.jpg"}
             alt="Imagen del hotel"
@@ -38,7 +41,7 @@ export const ViewHotel = () => {
           <h2 className="text-xl font-semibold mb-2">{hotel.nameHotel}</h2>
           <p className="text-gray-700 mb-1">{hotel.hotelAddresss}</p>
           <p className="text-yellow-500 mb-1">
-            Categoría: {renderStars(hotel.keeperCategory?.typeCategory)}
+            {renderStars(hotel.keeperCategory?.typeCategory)}
           </p>
         </div>
       ))}
