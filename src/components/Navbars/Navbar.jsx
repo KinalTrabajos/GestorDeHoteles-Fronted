@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
+
+
 const navigation = [
   { name: 'Hoteles', href: '#' },
   { name: 'Habitaciones', href: '#' },
@@ -36,9 +38,20 @@ export const Navbar = () => {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="/auth" className="text-sm/6 font-semibold text-gray-900">
-            Login <span aria-hidden="true">&rarr;</span>
-          </a>
+          {
+  localStorage.getItem("user")
+    ? (
+      <a href="/perfil" className="flex items-center gap-2 text-sm font-semibold text-gray-900">
+        <img src="/assets/img/perfil.png" alt="Perfil" className="w-8 h-8 rounded-full object-cover" />
+      </a>
+    ) : (
+      <a href="/auth" className="text-sm/6 font-semibold text-gray-900">
+        Login <span aria-hidden="true">&rarr;</span>
+      </a>
+    )
+}
+
+
         </div>
       </nav>
 
