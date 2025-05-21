@@ -1,23 +1,36 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
   { name: 'Hoteles', href: '/hotelPage' },
   { name: 'Habitaciones', href: '/auth' },
-  { name: 'Informes', href: '#' },
   { name: 'Reservas', href: '#' },
   { name: 'Eventos', href: '#' },
 ]
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
       <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
-        <div className="flex lg:flex-1">
-        </div>
+        <div className="flex lg:flex-1" />
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -28,19 +41,49 @@ export const Navbar = () => {
             <Bars3Icon className="size-6" aria-hidden="true" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12">
+
+        <div className="hidden lg:flex lg:gap-x-12 relative">
           {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-gray-900">
+            <a key={item.name} href={item.href} className="text-xl font-semibold text-white">
               {item.name}
             </a>
           ))}
+
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
+              className="text-xl font-semibold text-white"
+            >
+              Informes
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute mt-2 w-40 bg-white shadow-lg rounded-md py-1 z-50">
+                <a
+                  href="/reportes/*"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  Reportes Generales
+                </a>
+                <a
+                  href="/reportes/*"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  Estadísticas Generales
+                </a>
+              </div>
+            )}
+          </div>
         </div>
+
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="/auth" className="text-sm/6 font-semibold text-gray-900">
+          <a href="/auth" className="text-xl font-semibold text-white">
             Login <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </nav>
+
 
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
         <div className="fixed inset-0 z-50" />
@@ -66,11 +109,12 @@ export const Navbar = () => {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {navigation.map((item) => (
+                {[...navigation, { name: 'Informes', href: '#' }].map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
                   </a>
