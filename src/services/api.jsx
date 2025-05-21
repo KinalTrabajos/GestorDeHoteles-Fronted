@@ -42,7 +42,7 @@ export const register = async(data) =>{
 
 export const getRooms = async () => {
     try {
-        const response = await apiHotel.get('/viewRooms');
+        const response = await apiHotel.get('/rooms/viewRooms');
         return response.data; 
     } catch (e) {
         return {
@@ -52,3 +52,67 @@ export const getRooms = async () => {
         };
     }
 };
+
+export const addRoom = async (data) => {
+    try {
+        const response = await apiHotel.post("/rooms/addRoom", data);
+        return response.data;
+    } catch (e) {
+        return {
+            success: false,
+            msg: e.response?.data?.msg || "Error al crear habitación",
+            error: e.message
+        };
+    }
+};
+
+export const updateRoom = async (id, data) => {
+    try {
+        const response = await apiHotel.put(`/rooms/updateRoom/${id}`, data);
+        return response.data;
+    } catch (e) {
+        return {
+            success: false,
+            msg: e.response?.data?.msg || "Error al actualizar habitación",
+            error: e.message
+        };
+    }
+};
+
+export const updateDateAvailableRoom = async (id, data) => {
+  try {
+    const response = await apiHotel.put(`/rooms/updateDateAvailableRoom/${id}`, data);
+    return response.data;
+  } catch (e) {
+    return {
+      success: false,
+      msg: e.response?.data?.msg || "Error al actualizar fecha disponible",
+      error: e.message
+    };
+  }
+};
+
+
+export const deleteRoom = async (id) => {
+    try {
+        const response = await apiHotel.delete(`/rooms/deleteRoom/${id}`);
+        return response.data;
+    } catch (e) {
+        return {
+            success: false,
+            msg: e.response?.data?.msg || "Error al eliminar habitación",
+            error: e.message
+        };
+    }
+};
+
+export const wiewHoteles = async() =>{
+    try {
+        return await apiHotel.get('/hotels/viewHotels')
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}

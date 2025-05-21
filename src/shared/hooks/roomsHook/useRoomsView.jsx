@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getRooms } from "../../../services/api";
 
-export const useRooms = () => {
+export const useRoomsView = () => {
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
