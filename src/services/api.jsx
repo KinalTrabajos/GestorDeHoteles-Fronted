@@ -83,3 +83,15 @@ export const wiewHoteles = async() =>{
         }
     }
 }
+
+export const viewReservations = async () => {
+    try {
+        const response = await apiHotel.get('/reservations/viewReservations');
+        return response.data;
+    } catch (e) {
+        return {
+            error: true,
+            e
+        };
+    }
+};

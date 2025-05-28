@@ -59,7 +59,7 @@ export const Navbar = () => {
             {isDropdownOpen && (
               <div className="absolute mt-2 w-40 bg-white shadow-lg rounded-md py-1 z-50">
                 <a
-                  href="/reportes/*"
+                  href="/reservationViewPage"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   onClick={() => setIsDropdownOpen(false)}
                 >
