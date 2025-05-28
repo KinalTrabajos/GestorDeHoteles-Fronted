@@ -18,7 +18,7 @@ export const useRegister = () => {
         setIsLoading(false)
 
         if (response.error) {
-            return toast.error(response.error?.response?.data || 'Ocurrio un error al registrar, untenta de nuevo')
+            return toast.error(response.error?.response?.data || 'Ocurrio un error al registrar, intenta de nuevo')
         }
 
         const { userDetails } = response.data
@@ -27,7 +27,7 @@ export const useRegister = () => {
 
         toast.success('Usuario registrado Corretamente');
 
-        navigate('/', { replace: true });
+        navigate('/auth', { replace: true });
 
     }
 

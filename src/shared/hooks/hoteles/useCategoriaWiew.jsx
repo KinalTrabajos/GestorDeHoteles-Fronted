@@ -11,7 +11,7 @@ export const useCategoriaWiew = () => {
         if (response.error) {
             console.error("Error al obtener categorías", response.error)
         } else {
-            setCategorias(response.data)
+            setCategorias(response.data.category)
         }
         setIsLoading(false)
     }
