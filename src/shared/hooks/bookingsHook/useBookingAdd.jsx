@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { updateDateAvailableRoom } from "../../../services";
+import { addReservation } from "../../../services";
 
-export const useRoomUpdateDate = () => {
+export const useReservationAdd = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const updateDate = async (id, data) => {
+    const createReservation = async (roomId, data) => {
         setLoading(true);
         setError(null);
 
         try {
-            const response = await updateDateAvailableRoom(id, data);
+            const response = await addReservation(roomId, data);
 
             if (!response.success) {
-                setError(response.msg || "Error al actualizar fecha disponible");
+                setError(response.msg || "Error al crear la reserva");
             }
 
             return response;
@@ -29,5 +29,5 @@ export const useRoomUpdateDate = () => {
         }
     };
 
-    return { updateDate, loading, error };
+    return { createReservation, loading, error };
 };

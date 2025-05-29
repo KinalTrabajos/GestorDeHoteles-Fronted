@@ -9,7 +9,7 @@ export const AddRooms = () => {
         descriptionRoom: "",
         capacityRoom: "",
         priceRoom: "",
-        date: "",
+        numberRoom: "",
         nameHotel: ""
     });
 
@@ -40,7 +40,7 @@ export const AddRooms = () => {
                 descriptionRoom: "",
                 capacityRoom: "",
                 priceRoom: "",
-                date: "",
+                numberRoom: "",
                 nameHotel: ""
             });
         }
@@ -104,13 +104,14 @@ export const AddRooms = () => {
                 </div>
 
                 <div>
-                    <label className="block mb-1 font-medium">Fecha Disponible</label>
+                    <label className="block mb-1 font-medium">Numero de Habitacion</label>
                     <input
-                        type="date"
-                        name="date"
-                        value={formData.date}
+                        type="number"
+                        name="numberRoom"
+                        value={formData.numberRoom}
                         onChange={handleChange}
                         required
+                        min={1}
                         className="w-full px-3 py-2 border rounded-md"
                     />
                 </div>

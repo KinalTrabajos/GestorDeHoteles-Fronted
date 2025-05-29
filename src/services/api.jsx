@@ -29,11 +29,11 @@ export const login = async (data) => {
     }
 }
 
-export const register = async(data) =>{
+export const register = async (data) => {
     try {
         return await apiHotel.post('/auth/register', data);
     } catch (e) {
-        return{
+        return {
             error: true,
             e
         }
@@ -43,7 +43,7 @@ export const register = async(data) =>{
 export const getRooms = async () => {
     try {
         const response = await apiHotel.get('/rooms/viewRooms');
-        return response.data; 
+        return response.data;
     } catch (e) {
         return {
             success: false,
@@ -79,25 +79,14 @@ export const updateRoom = async (id, data) => {
     }
 };
 
-export const updateDateAvailableRoom = async (id, data) => {
-  try {
-    const response = await apiHotel.put(`/rooms/updateDateAvailableRoom/${id}`, data);
-    return response.data;
-  } catch (e) {
-    return {
-      success: false,
-      msg: e.response?.data?.msg || "Error al actualizar fecha disponible",
-      error: e.message
-    };
-  }
-};
-
-
 export const deleteRoom = async (id) => {
     try {
-        const response = await apiHotel.delete(`/rooms/deleteRoom/${id}`);
+        const response = await apiHotel.delete(`/rooms/deleteRoom/${id}`, {
+            data: { confirm: true } // Aquí envías el body
+        });
         return response.data;
     } catch (e) {
+        console.log("Error al eliminar habitación:", e.response?.data);
         return {
             success: false,
             msg: e.response?.data?.msg || "Error al eliminar habitación",
@@ -106,13 +95,96 @@ export const deleteRoom = async (id) => {
     }
 };
 
-export const wiewHoteles = async() =>{
+export const wiewHoteles = async () => {
     try {
         return await apiHotel.get('/hotels/viewHotels')
     } catch (e) {
-        return{
+        return {
             error: true,
             e
         }
     }
 }
+
+export const getBookings = async () => {
+    try {
+        const response = await apiHotel.get('/reservations/viewReservations');
+        return response.data;
+    } catch (e) {
+        return {
+            success: false,
+            msg: "Error al obtener las reservaciones",
+            error: e.message || e
+        };
+    }
+};
+
+export const getBookingsByHotel = async (idHotel) => {
+    try {
+        const response = await apiHotel.get(`/reservations/viewReservationsByHotel/${idHotel}`);
+        return response.data;
+    } catch (e) {
+        return {
+            success: true,
+            msg: "Error al obtener las reservaciones de este hotel",
+            error: e.message || e
+        };
+    }
+};
+
+export const confirmBooking = async (id) => {
+    try {
+        const response = await apiHotel.put(
+            `/reservations/confirmReservation/${id}`,
+            { ConfirmReservation: true }
+        );
+        return response.data;
+    } catch (e) {
+        return {
+            success: true,
+            msg: "Error al confirmar la reserva",
+            error: e.message || e
+        };
+    }
+};
+
+export const cancelBooking = async (id) => {
+    try {
+        const response = await apiHotel.delete(`/reservations/cancelReservation/${id}`, {
+            data: { confirm: true }
+        });
+        return response.data;
+    } catch (e) {
+        return {
+            success: false,
+            msg: "Error al cancelar la reserva",
+            error: e.response?.data?.msg || e.message || e
+        };
+    }
+};
+
+export const addReservation = async (roomId, data) => {
+    try {
+        const response = await apiHotel.post(`/reservations/addReservation/${roomId}`, data);
+        return response.data;
+    } catch (e) {
+        return {
+            success: false,
+            msg: "Error al crear la reserva",
+            error: e.response?.data?.msg || e.message || e
+        };
+    }
+};
+
+export const updateReservation = async (id, data) => {
+    try {
+        const response = await apiHotel.put(`/reservations/updateReservation/${id}`, data);
+        return response.data;
+    } catch (error) {
+        return {
+            success: false,
+            msg: "Error al actualizar la reserva",
+            error: error.message || error
+        };
+    }
+};

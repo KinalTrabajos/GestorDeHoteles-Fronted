@@ -32,12 +32,6 @@ export const RoomsList = () => {
             >
                 Eliminar habitación
             </button>
-            <button
-                className="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-blue-700 transition"
-                onClick={() => navigate("/editarFecha")}
-            >
-                Editar Fecha de una habitacion
-            </button>
 
             {rooms.length === 0 ? (
                 <p>No hay habitaciones registradas.</p>
@@ -49,6 +43,7 @@ export const RoomsList = () => {
                             <p className="text-gray-600">{room.descriptionRoom}</p>
                             <p><strong>Capacidad:</strong> {room.capacityRoom} personas</p>
                             <p><strong>Precio:</strong> Q{room.priceRoom}</p>
+                            <p><strong>Numero de Habitacion:</strong> {room.numberRoom}</p>
 
                             {room.keeperHotel && (
                                 <p><strong>Hotel:</strong> {room.keeperHotel.nameHotel}</p>
@@ -57,18 +52,6 @@ export const RoomsList = () => {
                                 <p><strong>Administrador:</strong> {room.keeperAdmin.name}</p>
                             )}
 
-                            <div className="mt-2">
-                                <p className="font-semibold">Fechas disponibles:</p>
-                                <ul className="list-disc list-inside">
-                                    {room.datesAvialableRoom.map((dateObj, index) => (
-                                        <li key={index}>
-                                            {new Date(dateObj.date).toLocaleDateString()} - 
-                                            {dateObj.availabilityRoom ? " Disponible" : " No disponible"}
-                                            {dateObj.keeperUser && ` (Reservado por: ${dateObj.keeperUser.username})`}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
                         </div>
                     ))}
                 </div>

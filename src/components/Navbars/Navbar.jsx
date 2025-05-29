@@ -6,7 +6,7 @@ const navigation = [
   { name: 'Hoteles', href: '#' },
   { name: 'Habitaciones', href: '/habitaciones' },
   { name: 'Informes', href: '#' },
-  { name: 'Reservas', href: '#' },
+  { name: 'Reservas', href: '/reservas' },
   { name: 'Eventos', href: '#' },
 ]
 

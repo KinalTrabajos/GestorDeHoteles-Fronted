@@ -16,7 +16,7 @@ export const UpdateRooms = () => {
         descriptionRoom: "",
         capacityRoom: "",
         priceRoom: "",
-        date: "",
+        numberRoom: "",
         nameHotel: ""
     });
 
@@ -31,7 +31,7 @@ export const UpdateRooms = () => {
                     descriptionRoom: selectedRoom.descriptionRoom,
                     capacityRoom: selectedRoom.capacityRoom,
                     priceRoom: selectedRoom.priceRoom,
-                    date: selectedRoom.date?.substring(0, 10) || "", // cortar hora
+                    numberRoom: selectedRoom.numberRoom,
                     nameHotel: selectedRoom.nameHotel
                 });
             }
@@ -132,11 +132,11 @@ export const UpdateRooms = () => {
                     </div>
 
                     <div>
-                        <label className="block mb-1 font-medium">Fecha Disponible</label>
+                        <label className="block mb-1 font-medium">Numero de Habitación</label>
                         <input
-                            type="date"
-                            name="date"
-                            value={formData.date}
+                            type="number"
+                            name="numberRoom"
+                            value={formData.numberRoom}
                             onChange={handleChange}
                             required
                             className="w-full px-3 py-2 border rounded-md"

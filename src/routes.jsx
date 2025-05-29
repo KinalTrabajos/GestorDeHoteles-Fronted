@@ -3,8 +3,10 @@ import { Auth } from "./page/auth"
 import { RoomsPage } from "./page/room/RoomsPage"
 import { AddRooms } from "./components/componentERooms/ComponentAddRooms"
 import { UpdateRooms } from "./components/componentERooms/ComponentUpdateRooms"
-import { UpdateDateRooms } from "./components/componentERooms/ComponentUpdateDateRooms"
 import { DeleteRooms } from "./components/componentERooms/ComponentDeleteRooms"
+import { BookingsPage } from "./page/booking/BookingsPage"
+import { AddReservation } from "./components/componentBookings/ComponentAddBooking"
+import { UpdateReservations } from "./components/componentBookings/ComponentUpdateBooking"
 
 const routes = [
   { path: "/", element: <DashboardPage /> },
@@ -14,6 +16,9 @@ const routes = [
   { path: "/agregarHabitaciones", element: <AddRooms/>},
   { path: "/editarHabitaciones", element: <UpdateRooms/>},
   { path: "/eliminarHabitaciones", element: <DeleteRooms/>},
-  { path: "/editarFecha", element: <UpdateDateRooms/>},
+  /*Reservas*/
+  { path: "/reservas", element: <BookingsPage/>},
+  { path: "/agregarReserva", element: <AddReservation/>},
+  { path: "/editarReserva", element: <UpdateReservations/>},
 ]
 export default routes
