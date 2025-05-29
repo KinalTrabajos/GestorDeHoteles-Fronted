@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRoomsView } from "../../shared/hooks/roomsHook/useRoomsView";
 import { useRoomUpdate } from "../../shared/hooks/roomsHook/useRoomsUpdate";
-import { useHotelsView } from "../../shared/hooks/hotelHook/useHotelView";
+import { useWiewHoteles } from "../../shared/hooks/hoteles/useWiewHoteles";
 
 export const UpdateRooms = () => {
     const navigate = useNavigate();
     const { rooms, loading: roomsLoading, error: roomsError } = useRoomsView();
-    const { hoteles, loading: hotelsLoading, error: hotelsError } = useHotelsView();
+    const { hoteles, loading: hotelsLoading, error: hotelsError } = useWiewHoteles();
     const { editRoom, loading: updating, error: updateError } = useRoomUpdate();
 
     const [selectedRoomId, setSelectedRoomId] = useState("");

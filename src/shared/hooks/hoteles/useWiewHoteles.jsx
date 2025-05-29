@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { wiewHoteles } from "../../../services/api";
 
-export const useHotelsView  = () => {
+export const useWiewHoteles = () => {
   const [hoteles, setHoteles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   

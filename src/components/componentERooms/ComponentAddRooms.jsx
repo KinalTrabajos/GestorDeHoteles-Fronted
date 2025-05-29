@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRoomAdd } from "../../shared/hooks/roomsHook/useRoomsAdd";
-import { useHotelsView  } from "../../shared/hooks/hotelHook/useHotelView";
+import { useWiewHoteles } from "../../shared/hooks/hoteles/useWiewHoteles";
 
 export const AddRooms = () => {
     const [formData, setFormData] = useState({
@@ -18,7 +18,7 @@ export const AddRooms = () => {
     const { createRoom, loading, error } = useRoomAdd();
     const [successMsg, setSuccessMsg] = useState(null);
 
-    const { hoteles, loading: hotelsLoading, error: hotelsError } = useHotelsView();
+    const { hoteles, loading: hotelsLoading, error: hotelsError } = useWiewHoteles();
 
     const handleChange = (e) => {
         setFormData({
