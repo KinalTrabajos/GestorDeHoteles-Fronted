@@ -1,3 +1,6 @@
+import { useState, useEffect } from 'react'
+import perfil from '../../assets/img/perfil.png'
+
 const navigation = [
   { name: 'Hoteles', href: '/' },
   { name: 'Habitaciones', href: '/auth' },
@@ -8,6 +11,19 @@ const navigation = [
 ]
 
 export const Navbar = () => {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user")
+    if (storedUser) {
+      setUser(JSON.parse(storedUser))
+    }
+  }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem("user")
+    setUser(null)
+  }
 
   return (
     <header className="bg-white shadow-md fixed w-full z-50">
@@ -28,12 +44,26 @@ export const Navbar = () => {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a
-            href="/auth"
-            className="text-sm font-semibold text-teal-600 hover:text-teal-800 transition"
-          >
-            Login <span aria-hidden="true">&rarr;</span>
-          </a>
+          {user ? (
+            <div className="flex items-center gap-4">
+              <a href="/perfil" className="flex items-center gap-2 text-sm font-semibold text-teal-600">
+                <img src={perfil} alt="Perfil" className="w-8 h-8 rounded-full object-cover" />
+              </a>
+              <button
+                onClick={handleLogout}
+                className="text-sm font-semibold text-teal-600 hover:text-teal-800 transition"
+              >
+                Cerrar sesión
+              </button>
+            </div>
+          ) : (
+            <a
+              href="/auth"
+              className="text-sm font-semibold text-teal-600 hover:text-teal-800 transition"
+            >
+              Login <span aria-hidden="true">&rarr;</span>
+            </a>
+          )}
         </div>
       </nav>
     </header>

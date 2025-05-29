@@ -113,3 +113,51 @@ export const updateHoteles = async (id, data) => {
         
     }
 }
+
+export const viewUsers = async () => {
+    try {
+        return await apiHotel.get('/users/usersView')
+    } catch (e) {
+        return {
+            error: true,
+            e
+        }
+    }
+}
+
+export const updateUser = async(data) => {
+    try {
+        return await apiHotel.put(`/users/updateUser`, data)
+    } catch (e) {
+        return {
+            error: true,
+            e
+        }
+    }
+}
+
+export const passwordUpdate = async(data) => {
+    try {
+        return await apiHotel.put("/users/passwordUpdate", data)
+    } catch (e) {
+        const msg = e.response?.data?.msg || 'Unknow error'
+        return {
+            error: true,
+            msg,
+            e
+        }
+    }
+}
+
+export const deleteUser = async(id, data) => {    
+    try {
+        return await apiHotel.delete(`/users/userDelete/${id}`, {data})
+    } catch (e) {
+        const msg = e.response?.data?.msg || 'Unknow error'
+        return {
+            error: true,
+            msg,
+            e
+        }
+    }
+}
