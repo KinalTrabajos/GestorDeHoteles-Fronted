@@ -36,7 +36,7 @@ export const ViewHotel = () => {
   if (error) return <p className="text-center text-red-500 mt-6">Error al cargar hoteles</p>
 
   return (
-    <div className="p-6">
+    <div className="p-1">
       {role === "PLATAFORM_ADMIN" && (
         <div className="flex justify-end mb-6">
           <button
@@ -81,10 +81,8 @@ export const ViewHotel = () => {
           ))}
         </div>
 
-        <div className="w-full lg:w-1/3 ">
-          <div className="sticky top-24 ">
-            <MovingMap />
-          </div>
+        <div className="sticky top-24 ">
+          <MovingMap />
         </div>
 
       </div>

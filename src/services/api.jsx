@@ -105,3 +105,11 @@ export const delethoteles = async (id) => {
         }
     }
 }
+
+export const updateHoteles = async (id, data) => {
+    try {
+        return await apiHotel.put(`/hotels/updateHotel/${id}`, data)
+    } catch (e) {
+        
+    }
+}

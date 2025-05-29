@@ -32,7 +32,7 @@ export const PagePrincipal = () => {
         </section>
 
         <section id="hoteles" className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-[5px]">
             <h2 className="text-3xl font-bold text-gray-900 mb-10 text-center">Nuestros Hoteles</h2>
             <ViewHotel />
           </div>
