@@ -28,4 +28,4 @@ const VerHotele = () => {
   )
 }
 
-export default VerHotele;
+export default VerHotele

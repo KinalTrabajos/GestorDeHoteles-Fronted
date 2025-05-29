@@ -84,6 +84,36 @@ export const wiewHoteles = async() =>{
     }
 }
 
+export const addHoteles = async(data) => {
+    try {
+        return await apiHotel.post('/hotels/addHotel', data)
+    } catch (e) {
+        return{
+            error: true,
+            e
+        }
+    }
+}
+
+export const delethoteles = async (id) => {
+    try {
+        return await apiHotel.delete(`/hotels/deleteHotel/${id}?confirm=true`)
+    } catch (e) {
+        return {
+            error: true,
+            e
+        }
+    }
+}
+
+export const updateHoteles = async (id, data) => {
+    try {
+        return await apiHotel.put(`/hotels/updateHotel/${id}`, data)
+    } catch (e) {
+        
+    }
+}
+
 export const viewReservations = async () => {
     try {
         const response = await apiHotel.get('/reservations/viewReservations');

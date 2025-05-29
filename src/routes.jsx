@@ -1,13 +1,17 @@
 import { DashboardPage } from "./page/dashboard"
 import { Auth } from "./page/auth"
-import { HotelPage } from "./page/hotel"
+import { PageHotelFull } from "./components/Hoteles/PageHotelFull"
+import { ReportsAndStatistics } from "./page/reports"
 import { ReservationViewPage } from "./page/reports"
+
 
 
 const routes = [
   { path: "/", element: <DashboardPage /> },
   { path: "/auth", element: <Auth/>},
-  { path: "/hotelPage", element: <HotelPage/>},
+  { path: "/hotel/:id", element: <PageHotelFull /> },
+  { path: "/reportsAndStatistics", element: <ReportsAndStatistics /> },
   { path: "/reservationViewPage", element: <ReservationViewPage/>}
+  
 ]
 export default routes
