@@ -1,10 +1,10 @@
 const navigation = [
   { name: 'Hoteles', href: '/' },
-  { name: 'Habitaciones', href: '/auth' },
+  { name: 'Habitaciones', href: '/habitaciones' },
   { name: 'Informes', href: '#' },
-  { name: 'Reservas', href: '#' },
-  { name: 'Eventos', href: '#' },
-  { name: 'Reservas de eventos', href: '#' },
+  { name: 'Reservas', href: '/reservas' },
+  { name: 'Eventos', href: '/eventos' },
+  { name: 'Reservas de eventos', href: '/reservationPage' },
 ]
 
 export const Navbar = () => {

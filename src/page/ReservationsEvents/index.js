@@ -1,0 +1,1 @@
+export { PagePrincipal } from "./PagePrincipal";
