@@ -32,7 +32,7 @@ export const ReportsAndStatistics = () => {
               </div>
             </Link>
 
-            <Link to="/informes/eventos">
+            <Link to="/StatisticsPage">
               <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-[1.02] border border-teal-100 hover:border-teal-300">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-2xl font-bold text-teal-600">Informe de Eventos</h2>

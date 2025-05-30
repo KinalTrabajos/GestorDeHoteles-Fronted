@@ -125,3 +125,27 @@ export const viewReservations = async () => {
         };
     }
 };
+
+export const getMostRequestedHotels = async () => {
+  try {
+    const response = await apiHotel.get('/statistics/mostRequestedHotels');
+    return response.data;
+  } catch (e) {
+    return {
+      error: true,
+      e
+    };
+  }
+};
+
+export const getMonthlyOccupancy = async () => {
+  try {
+    const response = await apiHotel.get('/statistics/monthlyOccupancy');
+    return response.data;
+  } catch (e) {
+    return {
+      error: true,
+      e
+    };
+  }
+};
