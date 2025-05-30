@@ -1,11 +1,25 @@
 import React from 'react';
 import { useEventsView } from '../../shared/hooks/eventsHook/useEventView';
+import { useEventDelete } from '../../shared/hooks/eventsHook/useEventDelete';
 import { useNavigate } from 'react-router-dom';
 import { Footer } from '../settings/Footer';
 
 export const EventsList = () => {
     const { events, loading, error, total } = useEventsView();
+    const { removeEvent, loading: deleting, error: deleteError } = useEventDelete();
     const navigate = useNavigate();
+
+    const handleDeleteEvent = async (id) => {
+        const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este evento?");
+        if (!confirmDelete) return;
+
+        const result = await removeEvent(id);
+        if (result.success) {
+            alert("Evento eliminado correctamente");
+        } else {
+            alert("Error al eliminar el evento: " + result.msg);
+        }
+    };
 
     if (loading) return <p className="text-center">Cargando eventos...</p>;
     if (error) return <p className="text-center text-red-500">Error: {error}</p>;
@@ -30,10 +44,10 @@ export const EventsList = () => {
                         Editar evento
                     </button>
                     <button
-                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
-                        onClick={() => navigate("/eliminarEvento")}
+                        className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700 transition"
+                        onClick={() => navigate("/editarServiciosDeEventos")}
                     >
-                        Eliminar evento
+                        Editar servicios
                     </button>
                 </div>
 
@@ -93,6 +107,16 @@ export const EventsList = () => {
                                         <p className="text-sm text-gray-500">No hay servicios adicionales.</p>
                                     )}
                                 </div>
+                                <button
+                                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                    onClick={() => handleDeleteEvent(event._id)}
+                                    disabled={deleting}
+                                >
+                                    {deleting ? "Eliminando..." : "Eliminar evento"}
+                                </button>
+                                {deleteError && (
+                                    <p className="text-red-500 mt-2 text-center">Error: {deleteError}</p>
+                                )}
                             </div>
                         ))}
                     </div>

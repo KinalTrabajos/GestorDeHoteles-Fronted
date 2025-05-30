@@ -326,3 +326,29 @@ export const updateEvent = async (id, data, isPrivate) => {
         };
     }
 };
+
+export const updateServicesEvent = async (id, data) => {
+    try {
+        const response = await apiHotel.put(`/events/updateServicesEvent/${id}`, data);
+        return response.data;
+    } catch (error) {
+        return {
+            success: false,
+            msg: "Error al actualizar los servicios del evento",
+            error: error.message || error
+        };
+    }
+};
+
+export const deleteEvent = async (id) => {
+    try {
+        const response = await apiHotel.delete(`/events/deleteEvent/${id}`);
+        return response.data;
+    } catch (error) {
+        return {
+            success: false,
+            msg: "Error al eliminar el evento",
+            error: error.response?.data?.msg || error.message || error
+        };
+    }
+};
