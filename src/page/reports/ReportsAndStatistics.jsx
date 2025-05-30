@@ -12,7 +12,7 @@ export const ReportsAndStatistics = () => {
         <section className="max-w-7xl mx-auto">
           <header className="mb-14 text-center">
             <h1 className="text-4xl md:text-5xl font-extrabold text-teal-700 tracking-tight drop-shadow-sm">
-              Reportes y Estadisticas
+              Reportes y Estadisticas Generales
             </h1>
             <p className="mt-4 text-lg text-gray-600 max-w-xl mx-auto">
               Accede a los diferentes informes disponibles en el sistema y obtén información clara y útil.
@@ -24,7 +24,7 @@ export const ReportsAndStatistics = () => {
               <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-[1.02] border border-teal-100 hover:border-teal-300">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-2xl font-bold text-teal-600">Informe de Reservas</h2>
-                  <BarChart3 className="w-8 h-8 text-teal-500 group-hover:rotate-12 transition-transform" />
+                  <CalendarCheck className="w-8 h-8 text-teal-500 group-hover:rotate-12 transition-transform" />
                 </div>
                 <p className="text-gray-600">
                   Consulta las reservas agrupadas por hotel y visualiza el estado de cada confirmación.
@@ -35,11 +35,11 @@ export const ReportsAndStatistics = () => {
             <Link to="/StatisticsPage">
               <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 hover:scale-[1.02] border border-teal-100 hover:border-teal-300">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-2xl font-bold text-teal-600">Informe de Eventos</h2>
-                  <CalendarCheck className="w-8 h-8 text-teal-500 group-hover:rotate-12 transition-transform" />
+                  <h2 className="text-2xl font-bold text-teal-600">Informe de Hoteles</h2>
+                  <BarChart3 className="w-8 h-8 text-teal-500 group-hover:rotate-12 transition-transform" />
                 </div>
                 <p className="text-gray-600">
-                  Visualiza los eventos programados y su información detallada por fechas y ubicación.
+                  Visualiza el Informe en forma de estadisticas de Hoteles la cual tiene los hoteles mas solicitados entre otras.
                 </p>
               </div>
             </Link>
