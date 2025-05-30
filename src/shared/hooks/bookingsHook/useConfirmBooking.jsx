@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { confirmBooking } from "../../../services/api";
+import toast from "react-hot-toast";
 
 export const useConfirmBooking = () => {
     const [loading, setLoading] = useState(false);
@@ -15,13 +16,18 @@ export const useConfirmBooking = () => {
             const response = await confirmBooking(id);
             if (response.success) {
                 setSuccess(true);
-                return response.reservation; // Devuelve la reserva actualizada
+                toast.success("Reservación confirmada correctamente");
+                return response.reservation;
             } else {
-                setError(response.msg || "Error al confirmar la reservación");
+                const msg = response.msg || "Error al confirmar la reservación";
+                setError(msg);
+                toast.error(msg);
                 return null;
             }
         } catch (err) {
-            setError("Error de conexión");
+            const msg = "Error de conexión";
+            setError(msg);
+            toast.error(msg);
             console.log(err);
             return null;
         } finally {

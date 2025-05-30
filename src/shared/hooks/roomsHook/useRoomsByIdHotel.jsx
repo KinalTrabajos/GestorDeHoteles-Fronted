@@ -12,10 +12,10 @@ export const useRoomsByHotel = (hotelId) => {
       setLoading(true);
       try {
         const data = await getRoomsByHotel(hotelId);
-        setRooms(data.rooms || []); // ✅ aquí extraes el array correcto
+        setRooms(data.rooms || []);
       } catch (error) {
         console.error("Error al cargar habitaciones:", error);
-        setRooms([]); // fallback
+        setRooms([]);
       } finally {
         setLoading(false);
       }

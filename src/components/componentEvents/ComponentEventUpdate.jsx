@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useEventUpdate } from "../../shared/hooks/eventsHook/useEventUpdate";
 import { useWiewHoteles } from "../../shared/hooks/hoteles";
-import { useEventsView } from "../../shared/hooks/eventsHook/useEventView"; // tu hook que lista eventos
+import { useEventsView } from "../../shared/hooks/eventsHook/useEventView";
 import { useNavigate } from "react-router-dom";
 
 export const EventEditForm = () => {
@@ -11,8 +11,7 @@ export const EventEditForm = () => {
 
   const [selectedEventId, setSelectedEventId] = useState("");
   const [event, setEvent] = useState(null);
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     nameEvent: "",
@@ -62,121 +61,131 @@ export const EventEditForm = () => {
     if (isPrivate) delete data.datesEvent;
 
     const result = await editEvent(event._id, data, isPrivate);
-    if (result.success) alert("Evento actualizado correctamente");
+    if (result.success) {
+      navigate("/eventos");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md space-y-4">
-      <h2 className="text-xl font-semibold text-gray-700">Editar Evento</h2>
+    <div className="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-xl">
+      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">✏️ Editar Evento</h2>
 
-      <select
-        value={selectedEventId}
-        onChange={e => setSelectedEventId(e.target.value)}
-        className="w-full px-4 py-2 border rounded-lg"
-      >
-        <option value="">Selecciona un evento</option>
-        {events.map(ev => (
-          <option key={ev._id} value={ev._id}>
-            {ev.nameEvent}
-          </option>
-        ))}
-      </select>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <select
+          value={selectedEventId}
+          onChange={e => setSelectedEventId(e.target.value)}
+          className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          <option value="">Seleccione un evento</option>
+          {events.map(ev => (
+            <option key={ev._id} value={ev._id}>
+              {ev.nameEvent}
+            </option>
+          ))}
+        </select>
 
-      {event && (
-        <>
-          <input
-            type="text"
-            name="nameEvent"
-            value={form.nameEvent}
-            onChange={handleChange}
-            placeholder="Nombre del evento"
-            required
-            className="w-full px-4 py-2 border rounded-lg"
-          />
-
-          <textarea
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-            placeholder="Descripción"
-            required
-            className="w-full px-4 py-2 border rounded-lg"
-          />
-
-          <select
-            name="nameHotel"
-            value={form.nameHotel}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded-lg"
-          >
-            <option value="">Seleccione un hotel</option>
-            {hoteles.map(hotel => (
-              <option key={hotel._id} value={hotel.nameHotel}>
-                {hotel.nameHotel}
-              </option>
-            ))}
-          </select>
-
-          <select
-            name="typeEvent"
-            value={form.typeEvent}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg"
-          >
-            <option value="Evento_General">Evento General</option>
-            <option value="Evento_Privado">Evento Privado</option>
-          </select>
-
-          {form.typeEvent === "Evento_General" && (
-            <div className="flex gap-4">
+        {event && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
-                type="date"
-                name="startDate"
-                value={form.startDate}
+                type="text"
+                name="nameEvent"
+                value={form.nameEvent}
                 onChange={handleChange}
+                placeholder="Nombre del evento"
                 required
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
-              <input
-                type="date"
-                name="endDate"
-                value={form.endDate}
+
+              <select
+                name="nameHotel"
+                value={form.nameHotel}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+              >
+                <option value="">Seleccione un hotel</option>
+                {hoteles.map(hotel => (
+                  <option key={hotel._id} value={hotel.nameHotel}>
+                    {hotel.nameHotel}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                name="typeEvent"
+                value={form.typeEvent}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+              >
+                <option value="Evento_General">Evento General</option>
+                <option value="Evento_Privado">Evento Privado</option>
+              </select>
+
+              <input
+                type="number"
+                name="priceEvent"
+                value={form.priceEvent}
+                onChange={handleChange}
+                min={1}
+                placeholder="Precio del evento"
+                required
+                className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
-          )}
 
-          <input
-            type="number"
-            name="priceEvent"
-            value={form.priceEvent}
-            onChange={handleChange}
-            min={1}
-            placeholder="Precio del evento"
-            required
-            className="w-full px-4 py-2 border rounded-lg"
-          />
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
-          >
-            {loading ? "Actualizando..." : "Actualizar evento"}
-          </button>
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleChange}
+              placeholder="Descripción del evento"
+              required
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
 
-          {error && <p className="text-red-500 font-semibold">{error}</p>}
-        </>
-      )}
-      <button
-          type="button"
-          onClick={() => navigate("/eventos")}
-          className="w-full py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-        >
-          Cancelar
-        </button>
-    </form>
+            {form.typeEvent === "Evento_General" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input
+                  type="date"
+                  name="startDate"
+                  value={form.startDate}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+                <input
+                  type="date"
+                  name="endDate"
+                  value={form.endDate}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                />
+              </div>
+            )}
+
+            {error && <p className="text-red-500 font-medium">{error}</p>}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="py-3 w-full bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition duration-200"
+              >
+                {loading ? "Guardando..." : "💾 Guardar cambios"}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => navigate("/eventos")}
+                className="py-3 w-full bg-gray-500 text-white font-semibold rounded-xl hover:bg-gray-600 transition duration-200"
+              >
+                🔙 Cancelar
+              </button>
+            </div>
+          </>
+        )}
+      </form>
+    </div>
   );
 };

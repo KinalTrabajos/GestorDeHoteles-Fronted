@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addEventGeneral, addEventPrivate } from "../../../services";
+import toast from "react-hot-toast";
 
 export const useEventAdd = () => {
     const [loading, setLoading] = useState(false);
@@ -15,16 +16,22 @@ export const useEventAdd = () => {
                 : await addEventGeneral(data);
 
             if (!response.success) {
-                setError(response.msg || "Error al crear el evento");
+                const msg = response.msg || "Error al crear el evento";
+                setError(msg);
+                toast.error(msg);
+            } else {
+                toast.success("Evento creado correctamente");
             }
 
             return response;
         } catch (err) {
-            setError("Error de conexión al servidor");
+            const msg = "Error de conexión al servidor";
+            setError(msg);
             console.error(err);
+            toast.error(msg);
             return {
                 success: false,
-                msg: "Error de conexión al servidor"
+                msg
             };
         } finally {
             setLoading(false);

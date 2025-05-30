@@ -27,6 +27,7 @@ export const PageHotelFull = () => {
   }, [])
 
   const hotel = hoteles.find(h => h._id === id)
+  console.log(hotel)
 
   if (!hotel) {
     return <p className="text-center mt-6">Hotel no encontrado</p>
@@ -102,7 +103,7 @@ export const PageHotelFull = () => {
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
                 {hotel.keeperEvents.map((event) => (
                   <li key={event._id}>
-                    <span className="font-semibold">{event.nameEvent}</span> - {event.descriptionEvent}
+                    <span className="font-semibold">{event.nameEvent}</span> - {event.description}
                   </li>
                 ))}
               </ul>

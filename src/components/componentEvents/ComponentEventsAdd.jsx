@@ -46,17 +46,17 @@ export const EventAddForm = () => {
 
     const result = await createEvent(data, isPrivate);
     if (result.success) {
-      alert("Evento creado exitosamente");
       navigate("/eventos");
     }
   };
 
-  return (
-    <div className="max-w-xl mx-auto bg-white p-6 rounded-2xl shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center">Agregar Evento</h2>
+ return (
+  <div className="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-xl">
+    <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">🗓️ Crear Nuevo Evento</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Datos del evento */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <input
           type="text"
           name="nameEvent"
@@ -64,16 +64,7 @@ export const EventAddForm = () => {
           onChange={handleChange}
           placeholder="Nombre del evento"
           required
-          className="w-full border rounded-md px-3 py-2"
-        />
-
-        <textarea
-          name="description"
-          value={form.description}
-          onChange={handleChange}
-          placeholder="Descripción"
-          required
-          className="w-full border rounded-md px-3 py-2"
+          className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
 
         <select
@@ -81,7 +72,7 @@ export const EventAddForm = () => {
           value={form.nameHotel}
           onChange={handleChange}
           required
-          className="w-full border rounded-md px-3 py-2"
+          className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           <option value="">Seleccione un hotel</option>
           {hoteles.map(hotel => (
@@ -95,32 +86,11 @@ export const EventAddForm = () => {
           name="typeEvent"
           value={form.typeEvent}
           onChange={handleChange}
-          className="w-full border rounded-md px-3 py-2"
+          className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           <option value="Evento_General">Evento General</option>
           <option value="Evento_Privado">Evento Privado</option>
         </select>
-
-        {form.typeEvent === "Evento_General" && (
-          <>
-            <input
-              type="date"
-              name="startDate"
-              value={form.startDate}
-              onChange={handleChange}
-              required
-              className="w-full border rounded-md px-3 py-2"
-            />
-            <input
-              type="date"
-              name="endDate"
-              value={form.endDate}
-              onChange={handleChange}
-              required
-              className="w-full border rounded-md px-3 py-2"
-            />
-          </>
-        )}
 
         <input
           type="number"
@@ -130,64 +100,104 @@ export const EventAddForm = () => {
           min={1}
           placeholder="Precio del evento"
           required
-          className="w-full border rounded-md px-3 py-2"
+          className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
+      </div>
 
-        <div className="border p-4 rounded-md bg-gray-50">
-          <h4 className="font-semibold mb-2">Servicios adicionales</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-            <input
-              type="text"
-              name="typeService"
-              value={service.typeService}
-              onChange={e => setService({ ...service, typeService: e.target.value })}
-              placeholder="Tipo de servicio"
-              className="border rounded-md px-3 py-2"
-            />
-            <input
-              type="text"
-              name="descriptionServices"
-              value={service.descriptionServices}
-              onChange={e => setService({ ...service, descriptionServices: e.target.value })}
-              placeholder="Descripción"
-              className="border rounded-md px-3 py-2"
-            />
-            <input
-              type="number"
-              name="priceService"
-              value={service.priceService}
-              onChange={e => setService({ ...service, priceService: e.target.value })}
-              placeholder="Precio"
-              className="border rounded-md px-3 py-2"
-            />
-          </div>
-          <button
-            type="button"
-            onClick={handleServiceAdd}
-            className="mt-2 px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-          >
-            Agregar servicio
-          </button>
+      <textarea
+        name="description"
+        value={form.description}
+        onChange={handleChange}
+        placeholder="Descripción del evento"
+        required
+        className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+
+      {/* Fechas */}
+      {form.typeEvent === "Evento_General" && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <input
+            type="date"
+            name="startDate"
+            value={form.startDate}
+            onChange={handleChange}
+            required
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <input
+            type="date"
+            name="endDate"
+            value={form.endDate}
+            onChange={handleChange}
+            required
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+      )}
+
+      {/* Servicios adicionales */}
+      <div className="border border-gray-200 p-6 rounded-xl bg-gray-50">
+        <h4 className="text-lg font-semibold mb-4 text-gray-700">Servicios adicionales</h4>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <input
+            type="text"
+            name="typeService"
+            value={service.typeService}
+            onChange={e => setService({ ...service, typeService: e.target.value })}
+            placeholder="Tipo de servicio"
+            className="border border-gray-300 rounded-xl px-3 py-2 shadow-sm"
+          />
+          <input
+            type="text"
+            name="descriptionServices"
+            value={service.descriptionServices}
+            onChange={e => setService({ ...service, descriptionServices: e.target.value })}
+            placeholder="Descripción"
+            className="border border-gray-300 rounded-xl px-3 py-2 shadow-sm"
+          />
+          <input
+            type="number"
+            name="priceService"
+            value={service.priceService}
+            onChange={e => setService({ ...service, priceService: e.target.value })}
+            placeholder="Precio"
+            className="border border-gray-300 rounded-xl px-3 py-2 shadow-sm"
+          />
         </div>
 
-        {error && <p className="text-red-500">{error}</p>}
+        <button
+          type="button"
+          onClick={handleServiceAdd}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
+        >
+          ➕ Agregar servicio
+        </button>
+      </div>
 
+      {/* Errores */}
+      {error && <p className="text-red-500 font-medium">{error}</p>}
+
+      {/* Botones */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          className="py-3 w-full bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition duration-200"
         >
-          {loading ? "Creando..." : "Crear evento"}
+          {loading ? "Creando..." : "✅ Crear evento"}
         </button>
 
         <button
           type="button"
           onClick={() => navigate("/eventos")}
-          className="w-full py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+          className="py-3 w-full bg-red-500 text-white font-semibold rounded-xl hover:bg-red-600 transition duration-200"
         >
-          Cancelar
+          ❌ Cancelar
         </button>
-      </form>
-    </div>
-  );
+      </div>
+    </form>
+  </div>
+);
+
 };

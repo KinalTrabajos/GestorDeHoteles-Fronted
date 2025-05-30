@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { deleteRoom } from "../../../services";
+import toast from "react-hot-toast";
 
 export const useRoomDelete = () => {
     const [loading, setLoading] = useState(false);
@@ -14,11 +15,15 @@ export const useRoomDelete = () => {
 
             if (!response.success) {
                 setError(response.msg || "Error al eliminar habitación");
+                toast.error(response.msg || "Error al eliminar habitación");
+            } else {
+                toast.success("Habitación eliminada correctamente");
             }
 
             return response;
         } catch (err) {
             setError("Error de conexión al servidor");
+            toast.error("Error de conexión al servidor");
             console.error(err);
             return {
                 success: false,

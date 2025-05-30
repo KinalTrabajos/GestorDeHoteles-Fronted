@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { cancelBooking } from "../../../services/api";
+import toast from "react-hot-toast";
 
 export const useCancelBooking = () => {
     const [loading, setLoading] = useState(false);
@@ -11,12 +12,18 @@ export const useCancelBooking = () => {
         try {
             const result = await cancelBooking(id);
             if (!result.success) {
-                setError(result.msg);
+                const message = result.msg || "Error al cancelar la reserva";
+                setError(message);
+                toast.error(message);
                 return null;
             }
+
+            toast.success("Reserva cancelada correctamente");
             return result;
         } catch (e) {
-            setError(e.message);
+            const message = e.message || "Error de conexión al servidor";
+            setError(message);
+            toast.error(message);
             return null;
         } finally {
             setLoading(false);
