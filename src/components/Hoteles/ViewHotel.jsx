@@ -37,13 +37,13 @@ export const ViewHotel = () => {
 
   return (
     <div className="p-1">
-      {role === "PLATAFORM_ADMIN" && (
+      {(role === "HOTEL_ADMIN" || role === "PLATAFORM_ADMIN") && (
         <div className="flex justify-end mb-6">
           <button
             onClick={() => setShowModal(true)}
             className="bg-teal-600 text-white px-5 py-2 rounded-lg shadow-sm hover:bg-teal-700 transition-all duration-200"
           >
-            Agregar
+            Agregar 
           </button>
         </div>
       )}
@@ -73,7 +73,7 @@ export const ViewHotel = () => {
                 >
                   Ver detalles
                 </button>
-                {role === "PLATAFORM_ADMIN" && (
+                {(role === "HOTEL_ADMIN" || role === "PLATAFORM_ADMIN") && (
                   <DeleteHotelButton hotelId={hotel._id} hotelName={hotel.nameHotel} />
                 )}
               </div>

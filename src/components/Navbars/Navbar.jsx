@@ -1,52 +1,77 @@
-import { useState, useEffect } from 'react'
-import perfil from '../../assets/img/perfil.png'
+import { useState, useEffect } from 'react';
+import perfil from '../../assets/img/perfil.png';
 
 const navigation = [
   { name: 'Hoteles', href: '/' },
-  { name: 'Habitaciones', href: '/auth' },
-  { name: 'Informes', href: '#' },
-  { name: 'Reservas', href: '#' },
-  { name: 'Eventos', href: '#' },
-  { name: 'Reservas de eventos', href: '#' },
-]
+  { name: 'Habitaciones', href: '/habitaciones' },
+  { name: 'Informes', href: '/reportsAndStatistics' },
+  { name: 'Reservas', href: '/reservas' },
+  { name: 'Eventos', href: '/eventos' },
+  { name: 'Facturas', href: '/invoicesPage' },
+  { name: 'Reservas de eventos', href: '/reservationPage' },
+];
 
 export const Navbar = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user")
+    const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser))
+      setUser(JSON.parse(storedUser));
     }
-  }, [])
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("user")
-    setUser(null)
-  }
+    localStorage.removeItem('user');
+    setUser(null);
+    window.location.href = '/';
+  };
 
   return (
     <header className="bg-white shadow-md fixed w-full z-50">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-        <div className="flex items-center">
-          <span className="text-xl font-bold text-teal-600 ">Hotel BooKing</span>
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+        {/* Logo */}
+        <div className="flex items-center gap-4">
+          <span className="text-xl font-bold text-teal-600">Hotel BooKing</span>
         </div>
-        <div className="hidden lg:flex lg:gap-x-8 ">
+
+        {/* Navegación principal */}
+        <div className="hidden lg:flex lg:gap-x-8">
           {navigation.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-sm font-medium text-gray-700 hover:text-teal-600 transition pl-7" 
-            >
-              <span className="mr-2 text-teal-400">🔸</span>
-              {item.name}
-            </a>
+            item.name === 'Reservas' ? (
+              <div key={item.name} className="relative group">
+                <button
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="text-sm font-medium text-gray-700 hover:text-teal-600 transition flex items-center gap-1"
+                >
+                  <span className="text-teal-400">🔸</span>{item.name} ▾
+                </button>
+                {dropdownOpen && (
+                  <div className="absolute z-10 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-md py-2">
+                    <a href="/reservas" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Todas las reservas</a>
+                    <a href="/reservationById/123456789012345678901234" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Por hotel</a>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-medium text-gray-700 hover:text-teal-600 transition px-2"
+              >
+                <span className="mr-2 text-teal-400">🔸</span>
+                {item.name}
+              </a>
+            )
           ))}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+
+        {/* Perfil o login */}
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-6">
           {user ? (
-            <div className="flex items-center gap-4">
-              <a href="/perfil" className="flex items-center gap-2 text-sm font-semibold text-teal-600">
+            <div className="flex items-center gap-6">
+              <a href="/perfil" className="flex items-center gap-3 text-sm font-semibold text-teal-600">
                 <img src={perfil} alt="Perfil" className="w-8 h-8 rounded-full object-cover" />
               </a>
               <button
@@ -67,5 +92,5 @@ export const Navbar = () => {
         </div>
       </nav>
     </header>
-  )
-}
+  );
+};
